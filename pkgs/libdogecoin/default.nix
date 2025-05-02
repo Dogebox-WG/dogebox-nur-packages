@@ -8,11 +8,11 @@
 
 stdenv.mkDerivation rec {
   pname = "libdogecoin";
-  version = "0.1.4-dogebox-pre";
+  version = "0.1.4";
 
   src = fetchurl {
     url = "https://github.com/dogecoinfoundation/libdogecoin/archive/refs/tags/v${version}.tar.gz";
-    hash = "sha256-HLgDkMWjjxnfDmqIJ4d2Univ3W/6zMZbB9Pt8XETW6A=";
+    hash = "sha256-4VIO+Rjc7jDi+H+//8OkBiH/yPXYJOYCz2rVzDW6jFA=";
   };
 
   configurePhase = ''
