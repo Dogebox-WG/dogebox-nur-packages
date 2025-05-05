@@ -7,11 +7,11 @@
 
 buildGoModule {
   pname = "reflector";
-  version = "0.0.1";
+  version = "0.0.2";
 
   src = fetchGit {
     url = "https://github.com/dogeorg/reflector.git";
-    rev = "dffbb3196eb4ebeabf56ea30af7049f75b8746c6";
+    rev = "d68d4281fb8df2bd54b65beb8950e64a2af50af9";
   };
 
   vendorHash = "sha256-Dfdzc2wZWis2/Lla6VLYkSUNKw4dTw8kEGCGdDN0org=";
