@@ -6,13 +6,13 @@
   ...
 }:
 
-buildGoModule {
+buildGoModule rec {
   pname = "gigawallet";
-  version = "1.0.6";
+  version = "1.0.8";
 
   src = fetchGit {
     url = "https://github.com/dogecoinfoundation/gigawallet.git";
-    ref = "refs/tags/v1.0.7";
+    ref = "refs/tags/v${version}";
   };
 
   vendorHash = "sha256-mW5SStSabjWIlLWarI0OfyCTRWRQnEbk2BXabJCJ2h4";
