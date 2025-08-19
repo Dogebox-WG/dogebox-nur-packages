@@ -23,7 +23,7 @@ let
     nativeBuildInputs = [ pkgs.bzip2 pkgs.perl pkgs.which pkgs.boost-build ];
     buildInputs = [ pkgs.zlib ];
 
-    configurePhase = ''./bootstrap.sh --with-toolset=gcc --without-icu --with-bjam=b2 --with-libraries=chrono,filesystem,program_options,system,thread'';
+    configurePhase = ''./bootstrap.sh --with-toolset=gcc --without-icu --with-bjam=b2 --with-libraries=chrono,filesystem,program_options,system,thread,test'';
     buildPhase     = ''b2 -d0 -j''${NIX_BUILD_CORES:-1} threading=multi link=static runtime-link=shared address-model=64 stage'';
     installPhase   = ''b2 -d0 threading=multi link=static runtime-link=shared address-model=64 install --prefix="$out"'';
   };
