@@ -22,11 +22,17 @@ let
 
     nativeBuildInputs = [ pkgs.bzip2 pkgs.perl pkgs.which pkgs.boost-build ];
     buildInputs = [ pkgs.zlib ]
-    ++ lib.optionals stdenv.hostPlatform.isDarwin [ pkgs.gcc ];
+      # Only add GCC explicitly on Linux — on Darwin use clang from stdenv
+      ++ lib.optionals stdenv.hostPlatform.isLinux [ pkgs.gcc ];
 
-    configurePhase = ''./bootstrap.sh --with-toolset=gcc --without-icu --with-bjam=b2 --with-libraries=chrono,filesystem,program_options,system,thread,test'';
-    buildPhase     = ''b2 -d0 -j''${NIX_BUILD_CORES:-1} threading=multi link=static runtime-link=shared address-model=64 stage'';
-    installPhase   = ''b2 -d0 threading=multi link=static runtime-link=shared address-model=64 install --prefix="$out"'';
+    configurePhase = ''
+      ./bootstrap.sh \
+        --with-toolset=${if stdenv.hostPlatform.isDarwin then "clang" else "gcc"} \
+        --without-icu --with-bjam=b2 \
+        --with-libraries=chrono,filesystem,program_options,system,thread,test
+    '';
+    buildPhase     = ''b2 -d0 -j''${NIX_BUILD_CORES:-1} threading=multi link=static runtime-link=shared address-model=64 stage cxxflags="-std=c++11"'';
+    installPhase   = ''b2 -d0 threading=multi link=static runtime-link=shared address-model=64 install --prefix="$out" cxxflags="-std=c++11"'';
   };
 in
 stdenv.mkDerivation rec {
@@ -51,10 +57,10 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     pkgs.pkg-config
+    pkgs.autoreconfHook
   ];
 
   buildInputs = [
-    pkgs.autoreconfHook
     pkgs.openssl
     pkgs.db5
     pkgs.util-linux
@@ -63,8 +69,7 @@ stdenv.mkDerivation rec {
     pkgs.libevent
     pkgs.protobuf
     pkgs.qrencode
-  ]
-  ++ lib.optional enableZMQ [
+  ] ++ lib.optional enableZMQ [
     pkgs.zeromq
   ];
 
