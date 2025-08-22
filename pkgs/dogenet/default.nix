@@ -5,13 +5,16 @@
   ...
 }:
 
+let
+  version = "0.1.10";
+in
 buildGoModule {
-  pname = "dogenet";
-  version = "0.5";
+  name = "dogenet";
+  inherit version;
 
   src = pkgs.fetchgit {
-    url = "https://github.com/dogeorg/dogenet.git";
-    rev = "v0.1.8";
+    url = "https://github.com/dogebox-wg/dogenet.git";
+    rev = "v${version}";
     hash = "sha256-0F0aMZaAiIReGWsoNoj3F86gMFUnh+P+T52LQX5opNM=";
   };
 
@@ -23,8 +26,8 @@ buildGoModule {
   ];
 
   meta = with lib; {
-    description = "Maps the Dogecoin network";
-    homepage = "https://github.com/dogeorg/dogenet";
+    description = "Gossip network for Dogecoin";
+    homepage = "https://github.com/dogebox-wg/dogenet";
     license = licenses.mit;
     maintainers = with maintainers; [ dogecoinfoundation ];
     platforms = platforms.all;
