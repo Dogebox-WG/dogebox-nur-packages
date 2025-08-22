@@ -21,7 +21,8 @@ let
     };
 
     nativeBuildInputs = [ pkgs.bzip2 pkgs.perl pkgs.which pkgs.boost-build ];
-    buildInputs = [ pkgs.zlib ];
+    buildInputs = [ pkgs.zlib ]
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [ pkgs.gcc ];
 
     configurePhase = ''./bootstrap.sh --with-toolset=gcc --without-icu --with-bjam=b2 --with-libraries=chrono,filesystem,program_options,system,thread,test'';
     buildPhase     = ''b2 -d0 -j''${NIX_BUILD_CORES:-1} threading=multi link=static runtime-link=shared address-model=64 stage'';
