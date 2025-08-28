@@ -23,7 +23,7 @@ let
     nativeBuildInputs = [ pkgs.bzip2 pkgs.perl pkgs.which pkgs.boost-build ];
     buildInputs = [ pkgs.zlib ]
       # Only add GCC explicitly on Linux — on Darwin use clang from stdenv
-      ++ lib.optionals stdenv.hostPlatform.isLinux [ pkgs.gcc ];
+      ++ lib.optionals stdenv.hostPlatform.isLinux [ pkgs.gcc13 ];
 
     configurePhase = ''
       ./bootstrap.sh \
