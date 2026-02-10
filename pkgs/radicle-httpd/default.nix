@@ -8,11 +8,11 @@
 
 stdenv.mkDerivation rec {
   pname = "radicle-httpd";
-  version = "0.17.0";
+  version = "0.23.0";
 
   src = fetchurl {
-    url = "https://files.radicle.xyz/releases/${pname}/latest/${pname}-${version}-x86_64-unknown-linux-musl.tar.xz";
-    hash = "sha256-SW/hgHGzA6FLmZHNzkIoome2cMaZcpQGTHyEc33cCuY=";
+    url = "https://files.radicle.xyz/releases/${pname}/${version}/${pname}-${version}-x86_64-unknown-linux-musl.tar.xz";
+    hash = "sha256-0ZFF5txyNEP9uLXqsTHD9C2Nrc0FGwwBmWohMo9q8BY=";
   };
 
   installPhase = ''
