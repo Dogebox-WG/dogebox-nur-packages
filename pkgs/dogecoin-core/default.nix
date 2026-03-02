@@ -38,13 +38,13 @@ in
 stdenv.mkDerivation rec {
   pname = "dogecoin-core";
   upstreamVersion = "1.14.9";
-  derivationVersion = "v1";
+  derivationVersion = "v2";
 
   version = "${upstreamVersion}-${derivationVersion}";
 
   src = fetchurl {
-    url = "https://github.com/dogecoin/dogecoin/archive/refs/tags/v${upstreamVersion}.tar.gz";
-    hash = "sha256-hiBetTR5OTHGl7Nm8c+OOiHHsw78hAD3dVbpdggyOn8=";
+    url = "https://github.com/dogecoin/dogecoin/releases/download/v${upstreamVersion}/dogecoin-${upstreamVersion}.tar.gz";
+    hash = "sha256-12OxbIENZzsf6Ewt8L2PNv7t+gpbMbuKLcX9yLtty4U=";
   };
 
   configureFlags = [
